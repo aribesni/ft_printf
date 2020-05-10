@@ -46,11 +46,12 @@ static void		ft_neg_p(int *j, char *base, pf_list *elem)
 		ft_putnbr_base((intptr_t)elem->p_integer, base);
 }
 
-static void		ft_assign_p(int **z, const char *str, pf_list *elem)
+static void		ft_assign_p(int **z, char *base, const char *str, pf_list *elem)
 {
 	if (str[**z] == '*' || (str[**z] == '-' && str[**z + 1] == '*'))
 		elem->tmp = va_arg(elem->pointer, int);
 	elem->p_integer = va_arg(elem->pointer, void*);
+	elem->size = ft_strlen(ft_itoa_base((intptr_t)elem->p_integer, base)) + 2;
 }
 
 int				ft_print_p(pf_list *elem, const char *str, int *z, char c)
@@ -61,20 +62,20 @@ int				ft_print_p(pf_list *elem, const char *str, int *z, char c)
 	*z += 1;
 	j = *z;
 	base = "0123456789abcdef";
-	ft_assign_p(&z, str, elem);
+	ft_assign_p(&z, base, str, elem);
 	elem->conv = c;
 	if (str[j] == '-' || elem->tmp < 0)
 		ft_neg_p(&j, base, elem);
 	while (str[j] >= '0' && str[j] <= '9' && str[j])
 		j++;
 	ft_rest_p(j, &z, str, elem);
-	j = (elem->p_integer == NULL) ? elem->wid - 3 : elem->wid - 11;
+	j = (elem->p_integer == NULL) ? elem->wid - 3 : elem->wid - elem->size;
 	while (j-- > 0)
 		ft_putchar(' ');
 	if (str[*z] != '-' && elem->tmp >= 0)
 		ft_pos_p(base, elem);
 	if (elem->p_integer != NULL)
-		elem->ret += (elem->wid > 11) ? elem->wid : 11;
+		elem->ret += (elem->wid > elem->size) ? elem->wid : elem->size;
 	else
 		elem->ret += (elem->wid < 3) ? 3 : elem->wid;
 	return (1);
