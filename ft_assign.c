@@ -12,7 +12,7 @@
 
 #include "libft_printf.h"
 
-static void		ft_size(pf_list *elem)
+static void		ft_size(t_list *elem)
 {
 	char		*s1;
 	char		*s2;
@@ -20,16 +20,16 @@ static void		ft_size(pf_list *elem)
 	s1 = "0123456789abcdef";
 	s2 = "0123456789ABCDEF";
 	if (elem->conv == 'x')
-		elem->size = ft_strlen(ft_itoa_base(elem->u_integer, s1));
+		elem->size = ft_strlen(ft_uitoa_base(elem->u_integer, s1));
 	else if (elem->conv == 'X')
-		elem->size = ft_strlen(ft_itoa_base(elem->u_integer, s2));
+		elem->size = ft_strlen(ft_uitoa_base(elem->u_integer, s2));
 	else if (elem->conv == 'u')
 		elem->size = ft_strlen(ft_itoa(elem->u_integer));
 	else if (elem->conv == 'i' || elem->conv == 'd')
 		elem->size = ft_strlen(ft_itoa(elem->integer));
 }
 
-static void		ft_assign_2(pf_list *elem)
+static void		ft_assign_2(t_list *elem)
 {
 	if (elem->conv == 'i' || elem->conv == 'd')
 	{
@@ -47,8 +47,10 @@ static void		ft_assign_2(pf_list *elem)
 		ft_size(elem);
 }
 
-void			ft_assign(int j, int **z, const char *str, pf_list *elem)
+void			ft_assign(int j, int **z, const char *str, t_list *elem)
 {
+	while (str[**z] == '-' && str[**z] != '%')
+		**z += 1;
 	if (((str[**z] == '0' && elem->conv != 's')
 		|| str[**z] == '-') && str[**z + 1] == '*')
 		**z += 1;

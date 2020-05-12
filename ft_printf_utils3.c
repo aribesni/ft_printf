@@ -22,7 +22,7 @@ int			ft_strlen(const char *str)
 	return (i);
 }
 
-void		ft_reset(pf_list *elem)
+void		ft_reset(t_list *elem)
 {
 	elem->wid = 0;
 	elem->prec = 0;
@@ -40,7 +40,7 @@ void		ft_flags(const char *str, int **i)
 		**i += 1;
 	if (str[**i + 1] == '*')
 		**i += 1;
-	if (str[**i + 1] == '-')
+	while (str[**i + 1] == '-')
 		**i += 1;
 	if (str[**i + 1] == '*')
 		**i += 1;
@@ -54,7 +54,7 @@ void		ft_flags(const char *str, int **i)
 		**i += 1;
 }
 
-void		ft_dot_bis(int i, const char *str, pf_list *elem)
+void		ft_dot_bis(int i, const char *str, t_list *elem)
 {
 	int		j;
 	char	*s1;

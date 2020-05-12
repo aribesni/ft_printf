@@ -69,7 +69,7 @@ static int		check_base(char *base)
 	return (1);
 }
 
-void			ft_putnbr_base(long int nb, char *base)
+void			ft_putnbr_base_u(long int nb, char *base)
 {
 	int			size_base;
 	int			nbr_final[100];

@@ -12,7 +12,7 @@
 
 #include "libft_printf.h"
 
-static void		ft_rest_5(int j, int ***z, const char *str, pf_list *elem)
+static void		ft_rest_5(int j, int ***z, const char *str, t_list *elem)
 {
 	int			i;
 
@@ -40,7 +40,7 @@ static void		ft_rest_5(int j, int ***z, const char *str, pf_list *elem)
 	elem->integer *= (elem->neg < 0) ? -1 : 1;
 }
 
-static void		ft_rest_4(int j, int l, const char *str, pf_list *elem)
+static void		ft_rest_4(int j, int l, const char *str, t_list *elem)
 {
 	if (elem->prec == 0 && str[l] == '.' && elem->u_integer == 0
 		&& elem->conv != 'i' && elem->conv != 'd')
@@ -49,7 +49,7 @@ static void		ft_rest_4(int j, int l, const char *str, pf_list *elem)
 		ft_putchar(' ');
 }
 
-static void		ft_rest_3(int k, const char *str, pf_list *elem)
+static void		ft_rest_3(int k, const char *str, t_list *elem)
 {
 	while (str[k] == '0')
 		k++;
@@ -57,7 +57,7 @@ static void		ft_rest_3(int k, const char *str, pf_list *elem)
 		elem->wid = (elem->tmp < 0) ? -elem->tmp : elem->tmp;
 }
 
-static void		ft_rest_2(int *j, int ***z, const char *str, pf_list *elem)
+static void		ft_rest_2(int *j, int ***z, const char *str, t_list *elem)
 {
 	int			l;
 	char		*s1;
@@ -80,7 +80,7 @@ static void		ft_rest_2(int *j, int ***z, const char *str, pf_list *elem)
 		elem->wid--;
 }
 
-void			ft_rest(int j, int **z, const char *str, pf_list *elem)
+void			ft_rest(int j, int **z, const char *str, t_list *elem)
 {
 	int			k;
 	int			l;

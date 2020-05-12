@@ -12,43 +12,43 @@
 
 #include "libft_printf.h"
 
-static void		ft_display_x(int k, const char *str, pf_list *elem)
+static void		ft_display_x(int k, const char *str, t_list *elem)
 {
 	if (elem->u_integer == 0 && str[k] != '.')
 		ft_putnbr(0);
 	else if (elem->u_integer == 0 && str[k] == '.' && elem->prec != 0)
 		ft_putnbr(0);
 	else if (elem->u_integer != 0 && str[k] != '.')
-		ft_putnbr_base(elem->u_integer, "0123456789abcdef");
+		ft_putnbr_base_u(elem->u_integer, "0123456789abcdef");
 	else if (elem->u_integer != 0 && str[k] == '.' && elem->prec != 0)
-		ft_putnbr_base(elem->u_integer, "0123456789abcdef");
+		ft_putnbr_base_u(elem->u_integer, "0123456789abcdef");
 	else if (elem->u_integer != 0 && str[k] == '.' && elem->wid == 0
 		&& elem->prec == 0)
-		ft_putnbr_base(elem->u_integer, "0123456789abcdef");
+		ft_putnbr_base_u(elem->u_integer, "0123456789abcdef");
 	else if (elem->u_integer != 0 && str[k] == '.' && elem->wid != 0
 		&& elem->prec == 0)
-		ft_putnbr_base(elem->u_integer, "0123456789abcdef");
+		ft_putnbr_base_u(elem->u_integer, "0123456789abcdef");
 }
 
-static void		ft_display_cap_x(int k, const char *str, pf_list *elem)
+static void		ft_display_cap_x(int k, const char *str, t_list *elem)
 {
 	if (elem->u_integer == 0 && str[k] != '.')
 		ft_putnbr(0);
 	else if (elem->u_integer == 0 && str[k] == '.' && elem->prec != 0)
 		ft_putnbr(0);
 	else if (elem->u_integer != 0 && str[k] != '.')
-		ft_putnbr_base(elem->u_integer, "0123456789ABCDEF");
+		ft_putnbr_base_u(elem->u_integer, "0123456789ABCDEF");
 	else if (elem->u_integer != 0 && str[k] == '.' && elem->prec != 0)
-		ft_putnbr_base(elem->u_integer, "0123456789ABCDEF");
+		ft_putnbr_base_u(elem->u_integer, "0123456789ABCDEF");
 	else if (elem->u_integer != 0 && str[k] == '.' && elem->wid == 0
 		&& elem->prec == 0)
-		ft_putnbr_base(elem->u_integer, "0123456789ABCDEF");
+		ft_putnbr_base_u(elem->u_integer, "0123456789ABCDEF");
 	else if (elem->u_integer != 0 && str[k] == '.' && elem->wid != 0
 		&& elem->prec == 0)
-		ft_putnbr_base(elem->u_integer, "0123456789ABCDEF");
+		ft_putnbr_base_u(elem->u_integer, "0123456789ABCDEF");
 }
 
-static void		ft_display_u(int k, const char *str, pf_list *elem)
+static void		ft_display_u(int k, const char *str, t_list *elem)
 {
 	if (elem->u_integer == 0 && str[k] != '.')
 		ft_putnbr(0);
@@ -66,7 +66,7 @@ static void		ft_display_u(int k, const char *str, pf_list *elem)
 		ft_putnbr(elem->u_integer);
 }
 
-static void		ft_display_i(int k, const char *str, pf_list *elem)
+static void		ft_display_i(int k, const char *str, t_list *elem)
 {
 	if (elem->integer == 0 && str[k] != '.')
 		ft_putnbr(0);
@@ -87,7 +87,7 @@ static void		ft_display_i(int k, const char *str, pf_list *elem)
 		ft_putchar(' ');
 }
 
-void			ft_display(int k, const char *str, pf_list *elem)
+void			ft_display(int k, const char *str, t_list *elem)
 {
 	if (elem->conv == 'i' || elem->conv == 'd')
 		ft_display_i(k, str, elem);

@@ -12,7 +12,7 @@
 
 #include "libft_printf.h"
 
-static void		ft_minus(pf_list *elem)
+static void		ft_minus(t_list *elem)
 {
 	if (elem->size == 0)
 	{
@@ -28,7 +28,7 @@ static void		ft_minus(pf_list *elem)
 		ft_putstr(elem->string);
 }
 
-static void		ft_dot_s3(int ***z, const char *str, pf_list *elem)
+static void		ft_dot_s3(int ***z, const char *str, t_list *elem)
 {
 	if (str[***z] == '-')
 		ft_minus(elem);
@@ -38,7 +38,7 @@ static void		ft_dot_s3(int ***z, const char *str, pf_list *elem)
 		ft_minus(elem);
 }
 
-static void		ft_dot_s2(int i, int ***z, const char *str, pf_list *elem)
+static void		ft_dot_s2(int i, int ***z, const char *str, t_list *elem)
 {
 	char		*s1;
 
@@ -67,7 +67,7 @@ static void		ft_dot_s2(int i, int ***z, const char *str, pf_list *elem)
 	}
 }
 
-int				ft_dot_s(int i, int **z, const char *str, pf_list *elem)
+int				ft_dot_s(int i, int **z, const char *str, t_list *elem)
 {
 	int			j;
 	char		*s1;

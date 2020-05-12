@@ -12,7 +12,7 @@
 
 #include "libft_printf.h"
 
-static void		ft_ret_i(int k, const char *str, pf_list *elem)
+static void		ft_ret_i(int k, const char *str, t_list *elem)
 {
 	if (elem->integer == 0 && elem->prec == 0
 		&& elem->wid == 0 && str[k] == '.')
@@ -30,7 +30,7 @@ static void		ft_ret_i(int k, const char *str, pf_list *elem)
 		elem->ret += elem->wid;
 }
 
-static void		ft_ret_u(int k, const char *str, pf_list *elem)
+static void		ft_ret_u(int k, const char *str, t_list *elem)
 {
 	if (elem->u_integer == 0 && elem->prec == 0
 		&& elem->wid == 0 && str[k] == '.')
@@ -48,7 +48,7 @@ static void		ft_ret_u(int k, const char *str, pf_list *elem)
 		elem->ret += elem->wid;
 }
 
-void			ft_ret(int k, const char *str, pf_list *elem)
+void			ft_ret(int k, const char *str, t_list *elem)
 {
 	if (elem->conv == 'i' || elem->conv == 'd')
 		ft_ret_i(k, str, elem);

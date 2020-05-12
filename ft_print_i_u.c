@@ -12,7 +12,7 @@
 
 #include "libft_printf.h"
 
-static void		ft_neg_2(pf_list *elem)
+static void		ft_neg_2(t_list *elem)
 {
 	int		i;
 
@@ -24,7 +24,7 @@ static void		ft_neg_2(pf_list *elem)
 		ft_putchar(' ');
 }
 
-static int		ft_neg(int k, const char *str, pf_list *elem)
+static int		ft_neg(int k, const char *str, t_list *elem)
 {
 	int			i;
 
@@ -53,7 +53,7 @@ static int		ft_neg(int k, const char *str, pf_list *elem)
 	return (1);
 }
 
-static void		ft_dot(int k, const char *str, pf_list *elem)
+static void		ft_dot(int k, const char *str, t_list *elem)
 {
 	int			l;
 	char		*s1;
@@ -66,7 +66,7 @@ static void		ft_dot(int k, const char *str, pf_list *elem)
 	elem->prec = (str[k] == '*') ? elem->tmp2 : ft_atoi(s1);
 }
 
-static void		ft_browse(int *k, const char *str, pf_list *elem)
+static void		ft_browse(int *k, const char *str, t_list *elem)
 {
 	while (str[*k] != '.' && (str[*k] != '\0' && str[*k] != '%'))
 		*k += 1;
@@ -74,7 +74,7 @@ static void		ft_browse(int *k, const char *str, pf_list *elem)
 		ft_dot(*k, str, elem);
 }
 
-int				ft_print_i_u(pf_list *elem, const char *str, int *z, char c)
+int				ft_print_i_u(t_list *elem, const char *str, int *z, char c)
 {
 	int			j;
 	int			k;
@@ -87,6 +87,7 @@ int				ft_print_i_u(pf_list *elem, const char *str, int *z, char c)
 	ft_browse(&k, str, elem);
 	if (str[*z] == '*')
 		ft_wildcard(j, k, str, elem);
+	j = (str[*z] == '-') ? *z : j;
 	if (str[j] == '-' || elem->tmp < 0)
 	{
 		j++;

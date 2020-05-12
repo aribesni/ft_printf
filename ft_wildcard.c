@@ -12,7 +12,7 @@
 
 #include "libft_printf.h"
 
-static void		ft_wildcard_2(int j, int k, const char *str, pf_list *elem)
+static void		ft_wildcard_2(int j, int k, const char *str, t_list *elem)
 {
 	elem->wid = (elem->tmp < 0) ? -elem->tmp : elem->tmp;
 	elem->space = elem->wid - elem->size;
@@ -26,16 +26,15 @@ static void		ft_wildcard_2(int j, int k, const char *str, pf_list *elem)
 	}
 }
 
-void			ft_wildcard(int j, int k, const char *str, pf_list *elem)
+void			ft_wildcard(int j, int k, const char *str, t_list *elem)
 {
 	if (elem->conv == 'i' || elem->conv == 'd')
 	{
 		elem->wid = (elem->tmp < 0) ? -elem->tmp : elem->tmp;
 		if (elem->neg < 0 && elem->prec >= elem->size)
 		{
-			elem->wid--;
-			if (elem->prec > elem->wid
-			&& elem->tmp >= 0 && elem->prec > elem->size)
+			if (elem->prec > elem->wid && elem->wid < elem->size
+				&& elem->tmp >= 0 && elem->prec > elem->size)
 				elem->ret++;
 		}
 		if (elem->prec > elem->size)

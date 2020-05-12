@@ -12,19 +12,19 @@
 
 #include "libft_printf.h"
 
-static void		ft_count(char c, pf_list *elem)
+static void		ft_count(char c, t_list *elem)
 {
 	ft_putchar(c);
 	elem->ret++;
 }
 
-static void		ft_check_str_2(int *i, const char *str, pf_list *elem)
+static void		ft_check_str_2(int *i, const char *str, t_list *elem)
 {
 	int		z;
 
 	z = *i;
 	ft_flags(str, &i);
-	if (str[*i + 1] == 'c')
+	if (str[*i + 1] == 'c' || str[*i + 1] == '%')
 		ft_print_c(elem, str, &z, str[*i + 1]);
 	else if (str[*i + 1] == 's')
 		ft_print_s(elem, str, &z, str[*i + 1]);
@@ -38,7 +38,7 @@ static void		ft_check_str_2(int *i, const char *str, pf_list *elem)
 	*i += 1;
 }
 
-static void		ft_check_str(const char *str, pf_list *elem)
+static void		ft_check_str(const char *str, t_list *elem)
 {
 	int			i;
 
@@ -55,7 +55,7 @@ static void		ft_check_str(const char *str, pf_list *elem)
 
 int				ft_printf(const char *str, ...)
 {
-	pf_list	elem;
+	t_list	elem;
 
 	elem.ret = 0;
 	va_start(elem.pointer, str);

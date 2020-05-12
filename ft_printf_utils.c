@@ -86,10 +86,10 @@ char				*ft_itoa(long int n)
 	return (str);
 }
 
-char				*ft_itoa_base(long int value, char *base)
+char				*ft_uitoa_base(long int value, char *base)
 {
 	int				count;
-	long long		tmp;
+	intptr_t		tmp;
 	unsigned int	base_length;
 	char			*res;
 
