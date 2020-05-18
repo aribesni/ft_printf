@@ -12,10 +12,10 @@
 
 #include "libft_printf.h"
 
-static void		ft_pos_p(char *base, t_list *elem)
+static void		ft_pos_p(int k, const char *str, char *base, t_list *elem)
 {
 	ft_putstr("0x");
-	if (elem->p_integer == NULL)
+	if (elem->p_integer == NULL && str[k] != '.' && str[k + 1] != 'p')
 		ft_putchar('0');
 	else
 		ft_putnbr_base_u((intptr_t)elem->p_integer, base);
@@ -23,33 +23,36 @@ static void		ft_pos_p(char *base, t_list *elem)
 
 static void		ft_rest_p(int j, int **z, const char *str, t_list *elem)
 {
+	int		k;
 	char	*s1;
 
+	k = j;
 	while (str[j] >= '0' && str[j] <= '9' && str[j])
 		j++;
-	if (str[**z] == '-')
-		s1 = ft_substr(str, **z + 1, (j - **z));
-	else
-		s1 = ft_substr(str, **z, (j - **z));
-	if (str[**z] == '*' || (str[**z] == '-' && str[**z + 1] == '*'))
-		elem->wid = elem->tmp;
-	else
-		elem->wid = ft_atoi(s1);
+	while (str[k] != '.' && (str[k] != '\0' && str[k] != '%'))
+		k++;
+	s1 = (str[**z] == '-') ? ft_substr(str, **z + 1, (j - **z)) :
+		ft_substr(str, **z, (j - **z));
+	elem->wid = (str[**z] == '*' || (str[**z] == '-'
+	&& str[**z + 1] == '*')) ? elem->tmp : ft_atoi(s1);
 	elem->wid = (elem->wid < 0) ? -elem->wid : elem->wid;
 	j = (elem->p_integer == NULL) ? elem->wid - 3 : elem->wid - elem->size;
+	j = (elem->p_integer == NULL && str[k] == '.'
+		&& str[k + 1] == 'p') ? elem->wid - 2 : j;
 	while (j-- > 0)
 		ft_putchar(' ');
-	if (elem->p_integer != NULL)
-		elem->ret += (elem->wid > elem->size) ? elem->wid : elem->size;
-	else
+	if (elem->p_integer == NULL && str[k] == '.' && str[k + 1] == 'p')
+		elem->ret += (elem->wid < 2) ? 2 : elem->wid;
+	else if (elem->p_integer == NULL)
 		elem->ret += (elem->wid < 3) ? 3 : elem->wid;
+	else
+		elem->ret += (elem->wid > elem->size) ? elem->wid : elem->size;
 }
 
-static void		ft_neg_p(int *j, char *base, t_list *elem)
+static void		ft_neg_p(int k, const char *str, char *base, t_list *elem)
 {
-	*j += 1;
 	ft_putstr("0x");
-	if (elem->p_integer == NULL)
+	if (elem->p_integer == NULL && str[k] != '.' && str[k + 1] != 'p')
 		ft_putchar('0');
 	else
 		ft_putnbr_base_u((intptr_t)elem->p_integer, base);
@@ -68,22 +71,27 @@ static void		ft_assign_p(int **z, char *base, const char *str, t_list *elem)
 int				ft_print_p(t_list *elem, const char *str, int *z, char c)
 {
 	int			j;
+	int			k;
 	char		*base;
 
 	*z += 1;
 	j = *z;
+	k = j;
 	base = "0123456789abcdef";
 	ft_assign_p(&z, base, str, elem);
 	elem->conv = c;
 	j = (str[*z] == '-') ? *z : j;
+	while (str[k] != '.' && (str[k] != '\0' && str[k] != '%'))
+		k++;
 	if (str[j] == '-' || elem->tmp < 0)
 	{
-		ft_neg_p(&j, base, elem);
+		j++;
+		ft_neg_p(k, str, base, elem);
 		ft_rest_p(j, &z, str, elem);
 		return (1);
 	}
 	ft_rest_p(j, &z, str, elem);
 	if (str[*z] != '-' && elem->tmp >= 0)
-		ft_pos_p(base, elem);
+		ft_pos_p(k, str, base, elem);
 	return (1);
 }

@@ -37,7 +37,9 @@ void			ft_wildcard(int j, int k, const char *str, t_list *elem)
 				&& elem->tmp >= 0 && elem->prec > elem->size)
 				elem->ret++;
 		}
-		if (elem->prec > elem->size)
+		if (elem->prec >= elem->size && elem->neg < 0)
+			elem->space = elem->wid - elem->prec - 1;
+		else if (elem->prec > elem->size)
 			elem->space = elem->wid - elem->prec;
 		else
 			elem->space = elem->wid - elem->size;
