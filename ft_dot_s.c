@@ -52,19 +52,10 @@ static void		ft_dot_s2(int i, int ***z, const char *str, t_list *elem)
 	else
 		elem->space = elem->wid - elem->prec;
 	if (elem->prec >= 0)
-	{
-		if (elem->prec > elem->wid)
-			elem->ret += elem->prec;
-		else
-			elem->ret += elem->wid;
-	}
+		elem->ret += (elem->prec > elem->wid) ? elem->prec : elem->wid;
 	else
-	{
-		if (elem->wid < elem->size)
-			elem->ret += elem->size;
-		else
-			elem->ret += elem->wid;
-	}
+		elem->ret += (elem->wid < elem->size) ? elem->size : elem->wid;
+	free(s1);
 }
 
 int				ft_dot_s(int i, int **z, const char *str, t_list *elem)
@@ -85,6 +76,7 @@ int				ft_dot_s(int i, int **z, const char *str, t_list *elem)
 			elem->prec = ft_strlen(elem->string);
 		else
 			elem->prec = ft_atoi(s1);
+		free(s1);
 	}
 	i++;
 	if (elem->prec > elem->size)

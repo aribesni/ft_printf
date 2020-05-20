@@ -68,6 +68,7 @@ static void		ft_rest_2(int *j, int ***z, const char *str, t_list *elem)
 		s1 = ft_substr(str, ***z, (*j - ***z));
 		elem->wid = ft_atoi(s1);
 		*j = elem->wid - elem->size;
+		free(s1);
 	}
 	if (str[***z] == '*' || str[***z - 1] == '*')
 	{

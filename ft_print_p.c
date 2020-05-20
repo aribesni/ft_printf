@@ -47,6 +47,7 @@ static void		ft_rest_p(int j, int **z, const char *str, t_list *elem)
 		elem->ret += (elem->wid < 3) ? 3 : elem->wid;
 	else
 		elem->ret += (elem->wid > elem->size) ? elem->wid : elem->size;
+	free(s1);
 }
 
 static void		ft_neg_p(int k, const char *str, char *base, t_list *elem)
@@ -60,12 +61,16 @@ static void		ft_neg_p(int k, const char *str, char *base, t_list *elem)
 
 static void		ft_assign_p(int **z, char *base, const char *str, t_list *elem)
 {
+	char	*s1;
+
 	while (str[**z] == '-' && str[**z] != '%')
 		**z += 1;
 	if (str[**z] == '*' || (str[**z] == '-' && str[**z + 1] == '*'))
 		elem->tmp = va_arg(elem->pointer, int);
 	elem->p_integer = va_arg(elem->pointer, void*);
-	elem->size = ft_strlen(ft_uitoa_base((intptr_t)elem->p_integer, base)) + 2;
+	s1 = ft_uitoa_base((intptr_t)elem->p_integer, base);
+	elem->size = ft_strlen(s1) + 2;
+	free(s1);
 }
 
 int				ft_print_p(t_list *elem, const char *str, int *z, char c)

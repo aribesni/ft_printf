@@ -72,13 +72,11 @@ void		ft_dot_bis(int i, const char *str, t_list *elem)
 			elem->prec = ft_strlen(elem->string);
 		else
 			elem->prec = ft_atoi(s1);
+		free(s1);
 	}
 	if (elem->prec > elem->size || elem->prec < 0)
 		elem->prec = elem->size;
 	elem->size = ft_strlen(elem->string);
 	elem->space = elem->wid - elem->prec;
-	if (elem->prec > elem->wid)
-		elem->ret += elem->prec;
-	else
-		elem->ret += elem->wid;
+	elem->ret += (elem->prec > elem->wid) ? elem->prec : elem->wid;
 }

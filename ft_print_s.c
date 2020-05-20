@@ -101,6 +101,7 @@ static void		ft_rest_s(int j, int **z, const char *str, t_list *elem)
 	if (str[**z] != '-' && elem->size > 0)
 		ft_putstr(elem->string);
 	elem->ret += (elem->wid < elem->size) ? elem->size : elem->wid;
+	free(s1);
 }
 
 int				ft_print_s(t_list *elem, const char *str, int *z, char c)

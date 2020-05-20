@@ -59,6 +59,7 @@ static void		ft_rest_c(int j, int **z, const char *str, t_list *elem)
 		ft_putchar(' ');
 	**z -= 1;
 	elem->ret += (elem->wid) ? elem->wid : 1;
+	free(s1);
 }
 
 int				ft_print_c(t_list *elem, const char *str, int *z, char c)

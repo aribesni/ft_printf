@@ -64,6 +64,7 @@ static void		ft_dot(int k, const char *str, t_list *elem)
 		l++;
 	s1 = ft_substr(str, k, (l - k));
 	elem->prec = (str[k] == '*') ? elem->tmp2 : ft_atoi(s1);
+	free(s1);
 }
 
 static void		ft_browse(int *k, const char *str, t_list *elem)
